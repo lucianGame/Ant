@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Overworld.unity
+    guid: 3b60ab27852a948fab7f322c2a0bdbec
+  - enabled: 1
+    path: Assets/Scenes/turn based battle.unity
+    guid: e9411b0d476a9479ea332f149bd3599d
+  - enabled: 0
+    path: Assets/Scenes/bug VR.unity
+    guid: f29095fd961aa4b6faf2b8c5c358e353
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 583f8c224166742dbab0dcc574f877b9, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ed45c46398c494ae0a1663941a58daba, type: 2}
