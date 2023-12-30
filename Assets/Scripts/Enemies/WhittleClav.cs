@@ -7,7 +7,7 @@ public class WhittleClav : MonoBehaviour
     public static Animator anim;
 
     public static float Health = 80;
-    public float maxHealth;
+    public float maxHealth = 80;
     public static float defense = 2;
     public static float attack = 10;
     public static float speed = 20;

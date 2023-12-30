@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public float defense;
     public float maxBP;
     public float bp;
-    public static float WeaponStat = 5;
+    public static float WeaponStat = 7;
 
     public static int weaponEquiped;
 

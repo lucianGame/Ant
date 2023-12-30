@@ -244,6 +244,7 @@ public class BattleSystemManager : MonoBehaviour
         WhittleClav.Health = WhittleClav.Health - (Player.WeaponStat - WhittleClav.defense); //Whittle Clav takes damage based on his defence the player's strength
         enemyHealthBar.UpdateHealthBar(); //The health bar goes down to reflect the damage Whittle took
 
+        print(WhittleClav.Health);
 
         if (WhittleClav.Health <= 0) //If Whittle Clav's health is depleated
         {
@@ -280,6 +281,8 @@ public class BattleSystemManager : MonoBehaviour
         }
         WhittleClav.Health = WhittleClav.Health - (Player.WeaponStat - WhittleClav.defense) * 2; //whittle clav takes twice as much damage as usual
         enemyHealthBar.UpdateHealthBar();
+
+        print(WhittleClav.Health);
 
         if (WhittleClav.Health <= 0) //if enemy is dead
         {

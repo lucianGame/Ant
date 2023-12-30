@@ -1,11 +1,153 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+  /*  PlayerInput playerInput;
+    CharacterController characterController;
+    Animator anim;
 
-    public Inventory inventory; //gives the player an item inventory
+    Vector2 currentMovementInput;
+    Vector3 currentMovement;
+    Vector3 currentRunMovement;
+    bool isRunPressed;
+    bool isMovementPressed;
+    float rotationFactorPerFrame = 20.0f;
+
+    public float walkSpeed;
+    public float runSpeed;
+
+    private void Awake()
+    {
+        playerInput = new PlayerInput();
+        characterController = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
+
+        playerInput.CharacterControls.Move.started += OnMovementInput;
+        playerInput.CharacterControls.Move.canceled += OnMovementInput;
+        playerInput.CharacterControls.Move.performed += OnMovementInput;
+
+        playerInput.CharacterControls.Run.started += OnRun;
+        playerInput.CharacterControls.Run.canceled += OnRun;
+
+    }
+
+    void OnMovementInput(InputAction.CallbackContext context)
+    {
+        currentMovementInput = context.ReadValue<Vector2>();
+        currentMovement.x = currentMovementInput.x;
+        currentMovement.z = currentMovementInput.y;
+        isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0; //if movement key is pressed, the number will either be less than or greater than zero
+    }
+
+    void OnRun (InputAction.CallbackContext context)
+    {
+        isRunPressed = context.ReadValueAsButton();
+    
+    }
+
+    void handleAnimation()
+    {
+        bool isWalking = anim.GetBool("Walking");
+        bool isRunning = anim.GetBool("Running");
+
+        //if move key is being pressed and player is not walking already, start walking
+        if(isMovementPressed && !isWalking)
+        {
+            anim.SetBool("Walking", true);
+        }
+
+        //if move key is not being pressed and player is walking, stop walking
+        else if(!isMovementPressed && isWalking)
+        {
+            anim.SetBool("Walking", false);
+        }
+
+        //if move key and run key are both pressed and player is not already running, start running
+        if ((isMovementPressed && isRunPressed) && !isRunning)
+        {
+            anim.SetBool("Running", true);
+        }
+
+        //if move key or run key stops being pressed, stop running
+        else if ((!isMovementPressed || !isRunPressed) && isRunning)
+        {
+            anim.SetBool("Running", false);
+        }
+    }
+
+    void handleRotation()
+    {
+        Vector3 positionToLookAt;
+        // the change in position our character should point to
+        positionToLookAt.x = currentMovement.x;
+        positionToLookAt.y = 0.0f;
+        positionToLookAt.z = currentMovement.z;
+
+        Quaternion currentRotation = transform.rotation;
+
+        if (isMovementPressed)
+        {
+            // creates new rotation based on where player is looking
+            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
+        }
+    }
+
+    private void Update()
+    {
+        handleRotation();
+        handleAnimation();
+
+        if (isRunPressed)
+        {
+            characterController.Move(currentMovement * Time.deltaTime * runSpeed);
+        }
+        else
+        {
+            characterController.Move(currentMovement * Time.deltaTime * walkSpeed);
+        }
+
+    }
+
+    void HandleGravity()
+    {
+        if (characterController.isGrounded)
+        {
+            float groundedGravity = -.05f;
+            currentMovement.y = groundedGravity;
+            currentRunMovement.y = groundedGravity;
+        }
+        else
+        {
+            float gravity = -9.8f;
+            currentMovement.y += gravity;
+            currentRunMovement.y += gravity;
+        }
+    }
+
+
+    Vector3 ConvertToCameraSpace(Vector3 vectorToRotate)
+    {
+
+    }
+   
+
+    private void OnEnable()
+    {
+        playerInput.CharacterControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInput.CharacterControls.Disable();
+    }
+} */
+
+
+   // public Inventory inventory; //gives the player an item inventory
 
 
     [SerializeField] private UI_Inventory uiInventory;
@@ -38,13 +180,13 @@ public class PlayerMovement : MonoBehaviour
 
     public static bool isWalking = false;
 
-    public Transform target; // target so the player faces the direction the camera is pointing when walking
+   // public Transform target; // target so the player faces the direction the camera is pointing when walking
 
 
     private void Awake()
     {
-        uiInventory.SetInventory(inventory);
-        inventory = new Inventory();
+       // uiInventory.SetInventory(inventory);
+      //  inventory = new Inventory();
     }
 
 
@@ -69,61 +211,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        { /*
+        { 
             //sets the axis of horizontal and vertical input
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
 
-            //play the walking animation if pressing the walking keys
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-            {
-                anim.SetTrigger("Walking");
-                anim.ResetTrigger("Idle");
-                walking = true;
-
-            }
-
-            //once the walking key is lifted, reset to the idle animation
-            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-            {
-                anim.ResetTrigger("Walking");
-                anim.SetTrigger("Idle");
-                walking = false;
-
-            }
-
-            /*  if (Input.GetKey(KeyCode.A))
-              {
-                  playerTrans.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
-              }
-              if (Input.GetKey(KeyCode.D))
-              {
-                  playerTrans.Rotate(0, rotationSpeed * Time.deltaTime, 0);
-              } 
-
-            //run if the left shift is held down
-            if (walking == true)
-            {
-                if (Input.GetKeyDown(KeyCode.LeftShift))
-                {
-
-                    walkSpeed = walkSpeed + runSpeed;
-                    anim.SetTrigger("Running");
-                    anim.ResetTrigger("Walking");
-                }
-
-                //resets the speed and animation once the run key is lifted
-                if (Input.GetKeyUp(KeyCode.LeftShift))
-                {
-
-                    walkSpeed = defaultSpeed;
-                    anim.ResetTrigger("Running");
-                    anim.SetTrigger("Walking");
-                } */
+         
         }
         Walking(); //play the function that allows the player to walk
 
-        // Turning(); //play the function that allows the player to turn
+        Turning(); //play the function that allows the player to turn
     }
 
 
@@ -135,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
 
         {
 
-            anim.SetInteger("Movement", 1); //plays the walking animation while moving
+            anim.SetTrigger("Walking"); //plays the walking animation while moving
 
             float z = Input.GetAxis("Vertical") * Time.deltaTime * walkSpeed; //moves player forward and backwards
             transform.Translate(0f, 0f, z);
@@ -145,12 +242,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            anim.SetInteger("Movement", 0); //plays the idle animation
+            anim.SetTrigger("Idle"); //plays the idle animation
             isWalking = false;
         }
 
 
-      /*  if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) //turn the player to the right
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) //turn the player to the right
         {
             transform.Rotate(new Vector3(0, degreesPerSecond, 0) * Time.deltaTime);
         }
@@ -158,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) //turn the player to the left
         {
             transform.Rotate(new Vector3(0, -degreesPerSecond, 0) * Time.deltaTime);
-        } */
+        } 
 
 
         if (Input.GetKey(KeyCode.LeftShift)) //increase speed
@@ -191,3 +288,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+

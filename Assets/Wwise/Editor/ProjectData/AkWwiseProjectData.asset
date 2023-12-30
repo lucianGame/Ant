@@ -345,7 +345,7 @@ MonoBehaviour:
     ParentPath: SoundBanks/Default Work Unit
     guid: 03ca665f48140a43929f4fd15d818013
     GuidInternal: 
-    m_lastTime: -8585005648361150898
+    m_lastTime: -8584998680071982251
     List:
     - name: Main
       guid: 316b8c175549314d8d56211c917ac967
@@ -373,7 +373,7 @@ MonoBehaviour:
     ParentPath: Events/Default Work Unit
     guid: b3293c7c9a39a2449565f1579b2cdee0
     GuidInternal: 
-    m_lastTime: -8585005729320186158
+    m_lastTime: -8584998680072018871
     List:
     - name: Background
       guid: 128360f9e97c8946aadb2404d5d75b9b
@@ -430,8 +430,8 @@ MonoBehaviour:
         guid: 7ea3d01a8cd81e4ca9309cb9dade259b
       Path: Events/Default Work Unit/Background/Bell
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 2.0932584
+      minDuration: 2.0932584
     - name: Bite
       guid: 8d4d174d12d25d41ab8014472169f7b4
       id: 1645043423

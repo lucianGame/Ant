@@ -13,6 +13,7 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID BELL = 1240512178U;
         static const AkUniqueID BITE = 1645043423U;
         static const AkUniqueID BOSS_FIGHT = 3688152761U;
         static const AkUniqueID CHARGING = 3828622232U;
