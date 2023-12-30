@@ -48,7 +48,7 @@ Material:
     - _ShnOverlap: 0
     - _ShnRange: 0
     - _ShnSmooth: 0
-    - _Steps: 5
+    - _Steps: 8.9
     - _StpSmooth: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

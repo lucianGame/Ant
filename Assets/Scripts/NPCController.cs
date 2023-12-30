@@ -10,7 +10,7 @@ public class NPCController : MonoBehaviour
 
     public static bool isTalking = false;
 
-    public AK.Wwise.Event Talking;
+   // public AK.Wwise.Event Talking;
 
     public GameObject prompt;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectInfo>
-	<Project Name="Sticks and Bugs" GUID="{0433B330-637F-4C50-BCDE-E351991F04E1}" Generator="2022.1.7.8290"/>
+	<Project Name="Sticks and Bugs" GUID="{0433B330-637F-4C50-BCDE-E351991F04E1}" Generator="2022.1.8.8316"/>
 	<CacheRoot>Z:/Applications/Audiokinetic/Wwise 2022.1.7.8290/Cube/Wwise-101_v2021/Lesson 1/Sticks and Bugs/.cache/</CacheRoot>
 	<Platforms>
 		<Platform Name="Mac" GUID="{2273C640-0855-4CC8-86BE-70A1D4F9FA7C}" BasePlatform="Mac" BasePlatformGUID="{9C6217D5-DD11-4795-87C1-6CE02853C540}" Path="Z:/Applications/Audiokinetic/Wwise 2022.1.7.8290/Cube/Wwise-101_v2021/Lesson 1/Sticks and Bugs/GeneratedSoundBanks/Mac/"/>
@@ -9,5 +9,5 @@
 	<Languages>
 		<Language Name="English(US)" Id="684519430" GUID="{93E1D37C-7625-48E7-BD4B-44210FC94833}" Default="true" UseAsStandIn="true"/>
 	</Languages>
-	<FileHash>{A506D966-B0A1-B207-072A-D472B11BD051}</FileHash>
+	<FileHash>{C432EE8C-4FE4-1B69-6152-6B31E45FCC9F}</FileHash>
 </ProjectInfo>

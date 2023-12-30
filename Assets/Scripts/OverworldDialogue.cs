@@ -11,6 +11,9 @@ public class OverworldDialogue : MonoBehaviour
     [SerializeField] Text dialogueText;
     [SerializeField] GameObject dialogueBox;
 
+    public AK.Wwise.Event talking;
+
+
 
     Dialogue dialogue;
     int currentLine = 0;
@@ -45,10 +48,12 @@ public class OverworldDialogue : MonoBehaviour
             dialogueText.text += letter; //adds one letter to the text box
             if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
             {
+                talking.Post(gameObject);
                 yield return new WaitForSeconds(1f / fastLetters); //text goes faster
             }
             else
             {
+                talking.Post(gameObject);
                 yield return new WaitForSeconds(1f / lettersPerSecond); //controls how many letters per second appear
             }
 
