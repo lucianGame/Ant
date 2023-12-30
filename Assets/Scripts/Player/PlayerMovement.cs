@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float walkSpeed;
 
-    CameraMove cameraControl;
+   // CameraMove cameraControl;
 
     private void Awake()
     {
@@ -23,9 +23,9 @@ public class PlayerMovement : MonoBehaviour
        var moveInput = (new Vector3(horizontal, 0, vertical)).normalized;
 
        //moveDirection is determined by the camera's horizontal rotation
-//       var moveDirection = cameraControl.PlanarRotation * moveInput;
+       var moveDirection = CameraMove.PlanarRotation * moveInput;
 
-       transform.position += moveInput * Time.deltaTime * walkSpeed;
+       transform.position += moveDirection * Time.deltaTime * walkSpeed;
     }
 
 }

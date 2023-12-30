@@ -12,7 +12,7 @@ public class CameraMove : MonoBehaviour
     public float minVerAngle = -45f;
     public float maxVerAngle = 45f;
 
-    float rotationY;
+    static float rotationY;
     float rotationX;
 
     public float cameraSpeed = 3f;
@@ -22,6 +22,8 @@ public class CameraMove : MonoBehaviour
 
     float invertXVal;
     float invertYVal;
+
+   
 
 
     private void Start()
@@ -52,6 +54,6 @@ public class CameraMove : MonoBehaviour
     }
 
     //only horizontal rotation, used for player move direction
-    public Quaternion PlanarRotation => Quaternion.Euler(0, rotationY, 0);
+    public static Quaternion PlanarRotation => Quaternion.Euler(0, rotationY, 0);
 }
 
