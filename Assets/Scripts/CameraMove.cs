@@ -4,62 +4,54 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    float _horizontalInput;
-    float _verticalInput;
-    Vector3 _playerInput;
-    [SerializeField] CharacterController _characterController;
+    public Transform followTarget;
+
+    public float cameraDistanceZ = 12.0f;
+    public float cameraDistanceY = -3.0f;
+
+    public float minVerAngle = -45f;
+    public float maxVerAngle = 45f;
+
+    float rotationY;
+    float rotationX;
+
+    public float cameraSpeed = 3f;
+
+    public bool invertX;
+    public bool invertY;
+
+    float invertXVal;
+    float invertYVal;
+
 
     private void Start()
     {
-        _characterController = GetComponent<CharacterController>();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     private void Update()
     {
-        //get and store player input every frame
-        _horizontalInput = Input.GetAxis("Horizontal");
-        _verticalInput = Input.GetAxis("Vertical");
+        //if invert camera rotation is true, multiply the rotation values by -1
+        invertXVal = (invertX) ? -1 : 1;
+        invertYVal = (invertY) ? -1 : 1;
 
-        //set it to the X and Z values of the Vector3
-        _playerInput.x = _horizontalInput;
-        _playerInput.y = _verticalInput;
+        //camera rotation is determined by trackpad
+        rotationY += Input.GetAxis("Mouse X") * invertXVal * cameraSpeed;
+        rotationX += Input.GetAxis("Mouse Y") * invertYVal * cameraSpeed;
+        //limit the vertical rotation
+        rotationX = Mathf.Clamp(rotationX, minVerAngle, maxVerAngle);
 
-        //transform position using Move and player input Vector3
-        _characterController.Move(_playerInput * Time.deltaTime);
+        var targetRotation = Quaternion.Euler(rotationX, rotationY, 0);
+
+        //the camera will follow the player and rotate around them
+        transform.position = followTarget.position - targetRotation * new Vector3(0, cameraDistanceY, cameraDistanceZ);
+        //camera will look at the player
+        transform.rotation = targetRotation;
     }
 
-    /*  //REFERENCES
-      public Transform orientation;
-      public Transform player;
-      public Transform playerObj;
-      public Rigidbody body;
-
-      //VARIABLES
-      public float rotationSpeed;
-
-      private void Start()
-      {
-          Cursor.lockState = CursorLockMode.Locked;
-          Cursor.visible = false;
-      } 
-
-      void Update()
-      {
-          //rotation orientation
-          Vector3 viewDirection = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-          orientation.forward = viewDirection.normalized;
-
-          //rotate player object
-          float horizontalInput = Input.GetAxis("Horizontal");
-          float verticalInput = Input.GetAxis("Vertical");
-          Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-          if (inputDirection != Vector3.zero)
-          {
-              playerObj.forward = Vector3.Slerp(playerObj.forward, inputDirection.normalized, Time.deltaTime * rotationSpeed);
-          }
-      }
-    */
+    //only horizontal rotation, used for player move direction
+    public Quaternion PlanarRotation => Quaternion.Euler(0, rotationY, 0);
 }
-
 
